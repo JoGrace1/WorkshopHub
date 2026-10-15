@@ -59,6 +59,16 @@ body {
   gap: 2rem;
 }
 
+.nav-auth {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.nav-user {
+  color: white;
+}
+
 .nav-button {
   background: none;
   border: none;
