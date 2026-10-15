@@ -8,8 +8,8 @@ const API_URL =
 export default function CreateWorkshop({ onCreated }) {
   const auth = useAuth();
   console.log("Authenticated:", auth.isAuthenticated);
-console.log("User profile:", auth.user?.profile);
-console.log("Groups:", auth.user?.profile?.["cognito:groups"]);
+  console.log("User profile:", auth.user?.profile);
+  console.log("Groups:", auth.user?.profile?.["cognito:groups"]);
   const [form, setForm] = useState({
     id: "",
     title: "",
@@ -80,81 +80,105 @@ console.log("Groups:", auth.user?.profile?.["cognito:groups"]);
   }
 
   return (
-    <section>
-      <h2>Create a workshop</h2>
+    <section className="create-workshop-section">
+      <div className="create-workshop-container">
+        <header className="create-workshop-heading">
+          <span className="create-workshop-eyebrow">Workshop management</span>
+          <h2>Create a workshop</h2>
+          <p>Add a new session to the WorkshopHub events list.</p>
+        </header>
 
-      <form onSubmit={handleSubmit}>
-        <label>
-          Workshop ID
-          <input
-            name="id"
-            value={form.id}
-            onChange={handleChange}
-            placeholder="workshop-009"
-            required
-          />
-        </label>
+        <form className="create-workshop-form" onSubmit={handleSubmit}>
+          <div className="create-workshop-fields">
+            <label className="create-workshop-field">
+              <span>Workshop ID</span>
+              <input
+                name="id"
+                value={form.id}
+                onChange={handleChange}
+                placeholder="e.g. workshop-009"
+                required
+              />
+            </label>
 
-        <label>
-          Title
-          <input
-            name="title"
-            value={form.title}
-            onChange={handleChange}
-            required
-          />
-        </label>
+            <label className="create-workshop-field">
+              <span>Title</span>
+              <input
+                name="title"
+                value={form.title}
+                onChange={handleChange}
+                placeholder="Give your workshop a clear title"
+                required
+              />
+            </label>
 
-        <label>
-          Category
-          <select
-            name="category"
-            value={form.category}
-            onChange={handleChange}
-          >
-            <option>Technology</option>
-            <option>Creative</option>
-            <option>Business</option>
-          </select>
-        </label>
+            <label className="create-workshop-field">
+              <span>Category</span>
+              <select
+                name="category"
+                value={form.category}
+                onChange={handleChange}
+              >
+                <option>Technology</option>
+                <option>Creative</option>
+                <option>Business</option>
+              </select>
+            </label>
 
-        <label>
-          Description
-          <textarea
-            name="description"
-            value={form.description}
-            onChange={handleChange}
-            required
-          />
-        </label>
+            <label className="create-workshop-field">
+              <span>Date</span>
+              <input
+                type="date"
+                name="date"
+                value={form.date}
+                onChange={handleChange}
+                required
+              />
+            </label>
 
-        <label>
-          Date
-          <input
-            type="date"
-            name="date"
-            value={form.date}
-            onChange={handleChange}
-            required
-          />
-        </label>
+            <label className="create-workshop-field">
+              <span>Location</span>
+              <input
+                name="location"
+                value={form.location}
+                onChange={handleChange}
+                placeholder="e.g. Online or Room 204"
+                required
+              />
+            </label>
 
-        <label>
-          Location
-          <input
-            name="location"
-            value={form.location}
-            onChange={handleChange}
-            required
-          />
-        </label>
+            <label className="create-workshop-field create-workshop-field-wide">
+              <span>Description</span>
+              <textarea
+                name="description"
+                value={form.description}
+                onChange={handleChange}
+                placeholder="What will attendees learn or do?"
+                rows="4"
+                required
+              />
+            </label>
+          </div>
 
-        <button type="submit" disabled={saving}>
-          {saving ? "Saving..." : "Create workshop"}
-        </button>
-      </form>
-
-      {message && <p>{message}</p>}
+          <div className="create-workshop-actions">
+            <p>Complete the required fields to publish this workshop.</p>
+            <button type="submit" disabled={saving}>
+              {saving ? "Creating workshop..." : "Create workshop"}
+            </button>
+          </div>
+          {message && (
+            <p
+              className={`create-workshop-message ${
+                message === "Workshop created successfully!" ? "is-success" : "is-error"
+              }`}
+              role="status"
+              aria-live="polite"
+            >
+              {message}
+            </p>
+          )}
+        </form>
+      </div>
     </section>
   );
 }
