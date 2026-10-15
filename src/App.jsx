@@ -4,6 +4,7 @@ import Hero from './components/Hero';
 import WorkshopList from './components/WorkshopList';
 import About from './components/About';
 import Footer from './components/Footer';
+import CreateWorkshop from "./utils/CreateWorkshops";
 import './App.css';
 
 function App() {
@@ -39,6 +40,7 @@ function App() {
     <div className="app">
       <Navbar />
       <Hero />
+      <CreateWorkshop />
       <WorkshopList 
         activeCategory={activeCategory}
         onCategoryChange={handleCategoryChange}
